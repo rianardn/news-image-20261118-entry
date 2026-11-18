@@ -15,4 +15,12 @@ DST = os.path.join(DST_DIR, "entry.png")
 
 os.makedirs(DST_DIR, exist_ok=True)
 shutil.copyfile(SRC, DST)
-print("wrote", DST)
+
+# Verify the copy is a real PNG before reporting success: a truncated or
+# corrupted entry.png would otherwise be graded silently.
+with open(DST, "rb") as fh:
+    header = fh.read(8)
+if header != b"\x89PNG\r\n\x1a\n":
+    raise SystemExit("output is not a valid PNG: " + DST)
+size = os.path.getsize(DST)
+print("wrote", DST, size, "bytes")
