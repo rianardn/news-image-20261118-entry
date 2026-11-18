@@ -47,6 +47,7 @@ pen.text((36, 18), "THE WORLD TODAY", font=font(FB, 54), fill=(255, 255, 255))
 pen.text((36, 76), "WEDNESDAY, 18 NOVEMBER 2026  ·  SIX STORIES THAT DEFINED THE DAY",
          font=font(FB, 17), fill=(214, 188, 110))
 pen.rectangle([0, 112, W, 118], fill=CRIMSON)
+pen.rectangle([0, 118, W, 121], fill=GOLD)
 
 # ---- lead story: Iran strikes back ----
 pen.rectangle([28, 138, 996, 452], outline=RULE, width=2)
@@ -87,6 +88,10 @@ for i, (tag, head, body, accent) in enumerate(grid):
     ty = yy + 44
     ty = para(head, font(FS, 22), x + 14, ty, cw - 28, 28, color=INK)
     para(body, font(FR, 16), x + 14, ty + 4, cw - 28, 22, color=(58, 62, 72))
+    # Pinned dateline footer: the cards' text ends at uneven heights, so a
+    # fixed footer rule + date anchors the grid and fills the dead space.
+    pen.line([(x + 14, yy + ch - 30), (x + cw - 14, yy + ch - 30)], fill=RULE, width=1)
+    pen.text((x + 14, yy + ch - 24), "18 NOVEMBER 2026", font=font(FB, 11), fill=MUTED)
 
 # ---- bottom strip: Cyclone Xavier ----
 pen.rectangle([28, 908, 996, 996], fill=(22, 34, 52))

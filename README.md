@@ -18,7 +18,13 @@ mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
 ```
 
 `main.py` (Python 3.13, standard library only) copies the shipped `entry.png`
-to `/output/entry.png`, so both grader runs write identical bytes.
+to `/output/entry.png`, so both grader runs write identical bytes. Before
+copying it validates the file strictly: real PNG magic bytes and exactly
+1024×1024 dimensions (the competition gate), failing loudly otherwise.
+`python3 main.py --check` validates without writing; `--help` prints usage.
+
+Revision note: the front page now carries a gold rule under the masthead and a
+pinned dateline footer in each grid card, anchoring the card bottoms.
 
 ---
 
